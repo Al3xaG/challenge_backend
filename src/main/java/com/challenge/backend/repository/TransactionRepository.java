@@ -20,8 +20,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             , nativeQuery = true)
     List<Object[]> findAllTransactionByDate(@Param("initDate") Date initDate, @Param("endDate") Date endDate, @Param("clientId") Long clientId);
 
-    @Query(value = "SELECT NVL(SUM(T.AMOUNT), 0) AS TOTALAMOUNT" +
-            " FROM TRANSACTIONS T WHERE LEFT(T.DATE, 10) = :date " +
+    @Query(value = "SELECT COALESCE(SUM(T.AMOUNT), 0) AS TOTALAMOUNT" +
+            " FROM TRANSACTIONS T WHERE SUBSTRING(CAST(T.DATE AS TEXT), 1, 10) = :date " +
             " AND T.TRANSACTION_TYPE = :type " +
             " AND T.ACCOUNT_ID = :id "
             , nativeQuery = true)
