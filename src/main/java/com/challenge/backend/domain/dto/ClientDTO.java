@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDTO {
+public class ClientDTO extends PersonDTO {
     private Long clientId;
     private String password;
     private Boolean status;
